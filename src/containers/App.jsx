@@ -22,6 +22,10 @@ export default class AppContainer extends Component {
           value: 'form'
         },
         {
+          name: 'Entries',
+          value: 'entries'
+        },
+        {
           name: 'Charts',
           value: 'charts'
         }
