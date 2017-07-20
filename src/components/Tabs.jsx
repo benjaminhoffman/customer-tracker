@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './tabs.css'
+import styles from './Tabs.css'
 
 const Tabs = ({ tabs, onTabClick }) => {
   return (

@@ -1,0 +1,12 @@
+.page {
+  display: flex;
+  margin: 25px;
+  flex-direction: column;
+}
+
+.tabs {
+  margin-bottom: 25px;
+}
+
+.body {
+}

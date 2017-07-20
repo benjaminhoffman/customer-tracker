@@ -1,9 +1,14 @@
 import React from 'react'
+import Login from './Login'
+import Form from './Form'
+import Charts from './Charts'
 
-const Body = () => {
+const Body = ({ activeTab }) => {
   return (
     <div>
-      Body
+      {activeTab === 'login' && <Login />}
+      {activeTab === 'form' && <Form />}
+      {activeTab === 'charts' && <Charts />}
     </div>
   )
 }

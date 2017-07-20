@@ -30,12 +30,13 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'style-loader',
+          'style-loader', // needed for css modules
           {
             loader: 'css-loader',
             options: {
-              modules: true,
-              importLoaders: 1
+              modules: true, // enables for css modules
+              importLoaders: 1,
+              localIdentName: '[path][name]_[local]_[hash:5]' // more descriptive class names
             }
           }
         ]
@@ -51,7 +52,7 @@ module.exports = {
     })
   ],
   devServer: {
-    hot: true,  // enable HMR
+    hot: true, // enable HMR
     contentBase: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   }

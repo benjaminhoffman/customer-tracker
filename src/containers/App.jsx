@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import Tabs from '../components/Tabs'
 import Body from '../components/Body'
+import styles from './App.css'
 
 export default class AppContainer extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.onTabClick = this.onTabClick.bind(this)
@@ -27,22 +28,21 @@ export default class AppContainer extends Component {
     }
   }
 
-  render () {
+  render() {
     return (
-      <div>
+      <div className={styles.page}>
         <Tabs
+          className={styles.tabs}
           tabs={this.state.tabs}
           onTabClick={this.onTabClick}
           activeTab={this.state.activeTab}
         />
-        <Body
-          activeTab={this.state.activeTab}
-        />
+        <Body className={styles.body} activeTab={this.state.activeTab} />
       </div>
     )
   }
 
-  onTabClick (tab) {
+  onTabClick(tab) {
     this.setState({
       activeTab: tab
     })
