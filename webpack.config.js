@@ -38,7 +38,8 @@ module.exports = {
               importLoaders: 1,
               localIdentName: '[path][name]_[local]_[hash:5]' // more descriptive class names
             }
-          }
+          },
+          'postcss-loader'
         ]
       }
     ]
