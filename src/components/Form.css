@@ -1,0 +1,71 @@
+.formWrapper {
+  margin: 24px 300px 24px 200px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.group {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.labelWrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  /*flex: 1 1 200px;*/
+  margin-right: 24px;
+  flex-basis: 180px;
+}
+
+.labelRadio {
+  padding-right: 8px;
+}
+
+.control {
+  justify-content: flex-start;
+  align-items: center;
+  flex-basis: 312px;
+  padding-left: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 32px;
+}
+
+.controlRadio {
+  display: flex;
+}
+
+.controlSelect {
+  justify-content: flex-start;
+  align-items: center;
+  flex-basis: 324px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 32px;
+}
+
+.submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  flex-direction: column;
+  margin: 0px 100px;
+}
+
+input[type="submit"] {
+  width: 380px;
+  flex-grow: 2;
+  background-color: transparent;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
