@@ -7,7 +7,8 @@
   "author": "Benjamin <bhoffman8@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "precommit": "lint-staged"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -28,7 +29,10 @@
     "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-standard": "^3.0.1",
     "html-webpack-plugin": "^2.29.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.0.2",
     "path": "^0.12.7",
+    "prettier": "^1.5.3",
     "style-loader": "^0.18.2",
     "webpack": "^3.3.0",
     "webpack-dev-server": "^2.5.1"
@@ -56,6 +60,11 @@
   },
   "lint-staged": {
     "*.jsx": [
+      "eslint --fix",
+      "prettier --write --single-quote --no-semi",
+      "git add"
+    ],
+    "*.js": [
       "eslint --fix",
       "prettier --write --single-quote --no-semi",
       "git add"
