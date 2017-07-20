@@ -8,6 +8,8 @@ export default class AppContainer extends Component {
     super(props)
 
     this.onTabClick = this.onTabClick.bind(this)
+    this.onLogin = this.onLogin.bind(this)
+    this.onFormSubmit = this.onFormSubmit.bind(this)
 
     this.state = {
       tabs: [
@@ -24,7 +26,7 @@ export default class AppContainer extends Component {
           value: 'charts'
         }
       ],
-      activeTab: 'login'
+      activeTab: 'form'
     }
   }
 
@@ -37,7 +39,12 @@ export default class AppContainer extends Component {
           onTabClick={this.onTabClick}
           activeTab={this.state.activeTab}
         />
-        <Body className={styles.body} activeTab={this.state.activeTab} />
+        <Body
+          className={styles.body}
+          activeTab={this.state.activeTab}
+          onLogin={this.onLogin}
+          onFormSubmit={this.onFormSubmit}
+        />
       </div>
     )
   }
@@ -46,5 +53,16 @@ export default class AppContainer extends Component {
     this.setState({
       activeTab: tab
     })
+  }
+
+  onLogin(e) {
+    e.preventDefault()
+    console.log('submitted')
+  }
+
+  onFormSubmit(e) {
+    e.preventDefault()
+
+    console.log('submitted')
   }
 }

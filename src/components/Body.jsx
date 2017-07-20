@@ -3,11 +3,11 @@ import Login from './Login'
 import Form from './Form'
 import Charts from './Charts'
 
-const Body = ({ activeTab }) => {
+const Body = ({ activeTab, onLogin, onFormSubmit }) => {
   return (
     <div>
-      {activeTab === 'login' && <Login />}
-      {activeTab === 'form' && <Form />}
+      {activeTab === 'login' && <Login onLogin={onLogin} />}
+      {activeTab === 'form' && <Form onFormSubmit={onFormSubmit} />}
       {activeTab === 'charts' && <Charts />}
     </div>
   )

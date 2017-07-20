@@ -5,7 +5,11 @@ const Tabs = ({ tabs, onTabClick }) => {
   return (
     <div className={styles.wrapper}>
       {tabs.map(tab =>
-        <div className={styles.tab} onClick={() => onTabClick(tab.value)}>
+        <div
+          className={styles.tab}
+          onClick={() => onTabClick(tab.value)}
+          key={tab.value}
+        >
           {tab.name}
         </div>
       )}
