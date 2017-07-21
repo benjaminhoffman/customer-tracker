@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Tabs from '../components/Tabs'
 import Body from '../components/Body'
 import styles from './App.css'
+import axios from 'axios'
 
 export default class AppContainer extends Component {
   constructor(props) {
@@ -68,5 +69,17 @@ export default class AppContainer extends Component {
     e.preventDefault()
 
     console.log('submitted')
+  }
+
+  componentDidMount() {
+    console.log('Mounted!')
+    axios
+      .get('http://localhost:3001/api')
+      .then(res => {
+        console.log('res', res)
+      })
+      .catch(e => {
+        console.log(e)
+      })
   }
 }

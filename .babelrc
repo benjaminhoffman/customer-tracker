@@ -1,3 +1,4 @@
 {
-  "presets": [ "es2015", "env", "react" ]
+  "plugins": ["recharts"],
+  "presets": ["es2015", "env", "react"]
 }
