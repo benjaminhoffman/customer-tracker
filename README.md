@@ -20,6 +20,7 @@ simple web app to help service professionals track their business/customers
 - authentication
 - condition logic to form fields
 - make fields required*
+- proptypes, defaultProps, displayName
 
 # Development
 `$ yarn install`
