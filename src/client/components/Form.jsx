@@ -7,7 +7,16 @@ class Form extends Component {
     super(props)
     this.state = {
       formData: {
-        date: getToday()
+        age: '',
+        country: '',
+        date: getToday(),
+        doctor: '',
+        gender: 'male',
+        initials: '',
+        internetSources: '',
+        other: '',
+        source: '',
+        zip: ''
       }
     }
     this.handleChange = this.handleChange.bind(this)
@@ -47,7 +56,7 @@ class Form extends Component {
               <label className={styles.labelRadio}>
                 <input
                   checked
-                  onChange={e => this.handleChange(e, name)}
+                  onChange={this.handleChange}
                   id="gender_male"
                   name="gender"
                   type="radio"
@@ -56,7 +65,7 @@ class Form extends Component {
               </label>
               <label className={styles.labelRadio}>
                 <input
-                  onChange={e => this.handleChange(e, name)}
+                  onChange={this.handleChange}
                   id="gender_female"
                   name="gender"
                   type="radio"
@@ -87,9 +96,9 @@ class Form extends Component {
           {/* INTERNET */}
           {selectDiv({
             handleChange: this.handleChange,
-            id: 'internet_sources',
+            id: 'internetSources',
             labelText: 'Internet',
-            value: this.state.formData.internet_sources,
+            value: this.state.formData.internetSources,
             values: internetSources
           })}
 
@@ -119,7 +128,7 @@ class Form extends Component {
               <label className={styles.labelRadio}>
                 <input
                   checked
-                  onChange={e => this.handleChange(e, name)}
+                  onChange={this.handleChange}
                   id="country_usa"
                   name="country"
                   type="radio"
@@ -128,7 +137,7 @@ class Form extends Component {
               </label>
               <label className={styles.labelRadio}>
                 <input
-                  onChange={e => this.handleChange(e, name)}
+                  onChange={this.handleChange}
                   id="country_other"
                   name="country"
                   type="radio"
@@ -155,23 +164,23 @@ class Form extends Component {
     )
   }
 
-  handleChange(e, id) {
+  handleChange(e) {
     this.setState({
       formData: {
         ...this.state.formData,
-        [`${id}`]: e.target.value
+        [`${e.target.name}`]: e.target.value
       }
     })
   }
 }
 
 const inputDiv = ({
-  labelText,
-  id,
-  type = 'text',
-  value,
+  handleChange,
   htmlFor,
-  handleChange
+  id,
+  labelText,
+  type = 'text',
+  value
 }) =>
   <div className={styles.group}>
     <span className={styles.labelWrapper}>
@@ -180,12 +189,12 @@ const inputDiv = ({
       </label>
     </span>
     <input
-      id={id}
-      type={type}
-      name={id}
       className={styles.control}
+      id={id}
+      name={id}
+      onChange={handleChange}
+      type={type}
       value={value}
-      onChange={e => handleChange(e, id)}
     />
   </div>
 
@@ -197,11 +206,11 @@ const selectDiv = ({ labelText, id, value, values, handleChange }) =>
       </label>
     </span>
     <select
-      name={id}
-      id={id}
-      value={value}
       className={styles.controlSelect}
-      onChange={e => handleChange(e, name)}
+      id={id}
+      name={id}
+      onChange={handleChange}
+      value={value}
     >
       {values.map(option =>
         <option value={option} key={option}>
