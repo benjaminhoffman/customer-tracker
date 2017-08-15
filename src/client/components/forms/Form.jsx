@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styles from './Form.css'
-import { sources, internetSources, doctors, radios } from './CONSTANTS'
+import { sources, channel, doctors, radios } from './CONSTANTS'
 import Text from './Text'
 import Select from './Select'
 import Radio from './Radio'
@@ -13,12 +13,12 @@ class Form extends Component {
     this.state = {
       formData: {
         age: '',
-        country: 'usa',
+        country: 'USA',
         date: getToday(),
         doctor: '',
         gender: 'male',
         initials: '',
-        internetSources: '',
+        channel: '',
         other: '',
         source: '',
         zip: ''
@@ -80,21 +80,23 @@ class Form extends Component {
           />
 
           {/* INTERNET */}
-          <Select
-            handleChange={this.handleChange}
-            id="internetSources"
-            labelText="Internet"
-            value={this.state.formData.internetSources}
-            values={internetSources}
-          />
+          {this.state.formData.source === 'Internet' &&
+            <Select
+              handleChange={this.handleChange}
+              id="channel"
+              labelText="Internet"
+              value={this.state.formData.channel}
+              values={channel}
+            />}
 
           {/* OTHER */}
-          <Text
-            handleChange={this.handleChange}
-            id="other"
-            labelText="Other"
-            value={this.state.formData.other}
-          />
+          {this.state.formData.source === 'Other' &&
+            <Text
+              handleChange={this.handleChange}
+              id="other"
+              labelText="Other"
+              value={this.state.formData.other}
+            />}
 
           {/* DOCTOR */}
           <Select
@@ -119,6 +121,7 @@ class Form extends Component {
             handleChange={this.handleChange}
             id="zip"
             labelText={`Zip Code`}
+            type="number"
             value={this.state.formData.zip}
           />
 
@@ -132,12 +135,27 @@ class Form extends Component {
   }
 
   handleChange(e) {
+    const value = formatValue(e.target.name, e.target.value)
     this.setState({
       formData: {
         ...this.state.formData,
-        [`${e.target.name}`]: e.target.value
+        [`${e.target.name}`]: value
       }
     })
+  }
+}
+
+// helper func; format form values to match what db expects
+const formatValue = (name, val) => {
+  switch (name) {
+    case 'initials':
+      return val.toUpperCase().slice(0, 2)
+    case 'zip':
+      return val.slice(0, 5)
+    case 'age':
+      return val.slice(0, 2)
+    default:
+      return val
   }
 }
 

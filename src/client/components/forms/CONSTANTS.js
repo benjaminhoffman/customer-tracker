@@ -1,5 +1,4 @@
 const sources = [
-  'Select',
   'Physician',
   'Cedars',
   'Internet',
@@ -10,9 +9,9 @@ const sources = [
   'Other'
 ]
 
-const internetSources = ['Select', 'Bing', 'Google', 'Yahoo', 'Yelp', 'Other']
+const channel = ['Bing', 'Google', 'Yahoo', 'Yelp', 'Other']
 
-const doctors = ['Select', 'Hoffman', 'Firoozmand', 'Capiendo']
+const doctors = ['gh', 'ef', 'lc']
 
 const radios = {
   gender: [
@@ -33,19 +32,20 @@ const radios = {
   ],
   country: [
     {
-      checked: 'usa',
+      checked: 'USA',
       id: 'countryUSA',
       name: 'country',
-      value: 'usa',
+      value: 'USA',
       inputText: 'USA'
     },
     {
-      checked: 'other',
+      checked: 'Other',
       id: 'countryOther',
       name: 'country',
-      value: 'other',
+      value: 'Other',
       inputText: 'Other'
     }
   ]
 }
-export { sources, internetSources, doctors, radios }
+
+export { sources, channel, doctors, radios }
