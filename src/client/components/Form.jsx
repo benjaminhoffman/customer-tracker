@@ -1,182 +1,216 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styles from './Form.css'
+import { sources, internetSources, doctors } from './CONSTANTS'
 
-const sources = [
-  'Select',
-  'Physician',
-  'Cedars',
-  'Internet',
-  'Insurance',
-  'Family',
-  'Lapeer',
-  'Saban',
-  'Other'
-]
+class Form extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      formData: {
+        date: getToday()
+      }
+    }
+    this.handleChange = this.handleChange.bind(this)
+  }
 
-const internetSources = ['Select', 'Bing', 'Google', 'Yahoo', 'Yelp', 'Other']
+  render() {
+    const { onFormSubmit } = this.props
+    return (
+      <div className={styles.formWrapper}>
+        <form
+          className={styles.form}
+          onSubmit={e => onFormSubmit(e, this.state.formData)}
+        >
+          {/* DATE */}
+          {inputDiv({
+            handleChange: this.handleChange,
+            id: 'date',
+            labelText: 'Date of Appointment',
+            type: 'date',
+            value: this.state.formData.date
+          })}
 
-const doctors = ['Select', 'Hoffman', 'Firoozmand', 'Capiendo']
+          {/* INITIALS */}
+          {inputDiv({
+            handleChange: this.handleChange,
+            id: 'initials',
+            labelText: `Patient's Initials`,
+            value: this.state.formData.initials
+          })}
 
-const Form = ({ onFormSubmit }) => {
-  return (
-    <div className={styles.formWrapper}>
-      <form className={styles.form} onSubmit={onFormSubmit}>
-        {/* DATE */}
-        <div className={styles.group}>
-          <span className={styles.labelWrapper}>
-            <label htmlFor="date">Date of Appointment:</label>
-          </span>
-          <input
-            id="date"
-            type="date"
-            name="date"
-            className={styles.control}
-            value={getToday()}
-          />
-        </div>
-        {/* INITIALS */}
-        <div className={styles.group}>
-          <span className={styles.labelWrapper}>
-            <label htmlFor="initials">Patient's Initials:</label>
-          </span>
-          <input
-            id="initials"
-            type="text"
-            name="intials"
-            className={styles.control}
-          />
-        </div>
-        {/* GENDER */}
-        <div className={styles.group}>
-          <span className={styles.labelWrapper}>
-            <label htmlFor="gender">Patient's Gender:</label>
-          </span>
-          <span className={styles.controlRadio}>
-            <label className={styles.labelRadio}>
-              <input
-                id="gender_male"
-                type="radio"
-                name="gender"
-                value="male"
-                checked
-              />Male
-            </label>
-            <label className={styles.labelRadio}>
-              <input
-                id="gender_female"
-                type="radio"
-                name="gender"
-                value="female"
-              />Female
-            </label>
-          </span>
-        </div>
-        {/* AGE */}
-        <div className={styles.group}>
-          <span className={styles.labelWrapper}>
-            <label htmlFor="age">Patient's Age:</label>
-          </span>
-          <input id="age" type="number" name="age" className={styles.control} />
-        </div>
-        {/* SOURCE */}
-        <div className={styles.group}>
-          <span className={styles.labelWrapper}>
-            <label htmlFor="source">Referral Source:</label>
-          </span>
-          <select name="source" id="source" className={styles.controlSelect}>
-            {sources.map(source =>
-              <option value={source} key={source}>
-                {source}
-              </option>
-            )}
-          </select>
-        </div>
-        {/* INTERNET */}
-        <div className={styles.group}>
-          <span className={styles.labelWrapper}>
-            <label htmlFor="internet_sources">Internet:</label>
-          </span>
-          <select
-            name="internet_sources"
-            id="internet_sources"
-            className={styles.controlSelect}
-          >
-            {internetSources.map(source =>
-              <option value={sources} key={source}>
-                {source}
-              </option>
-            )}
-          </select>
-        </div>
-        {/* OTHER */}
-        <div className={styles.group}>
-          <span className={styles.labelWrapper}>
-            <label htmlFor="other">Other:</label>
-          </span>
-          <input
-            id="other"
-            type="text"
-            name="other"
-            placeholder="type source here"
-            className={styles.control}
-          />
-        </div>
-        {/* DOCTOR */}
-        <div className={styles.group}>
-          <span className={styles.labelWrapper}>
-            <label htmlFor="doctor">Doctor:</label>
-          </span>
-          <select name="doctor" id="doctor" className={styles.controlSelect}>
-            {doctors.map(doc =>
-              <option value={doc} key={doc}>
-                {doc}
-              </option>
-            )}
-          </select>
-        </div>
-        {/* COUNTRY */}
-        <div className={styles.group}>
-          <span className={styles.labelWrapper}>
-            <label htmlFor="country">Country:</label>
-          </span>
-          <span className={styles.controlRadio}>
-            <label className={styles.labelRadio}>
-              <input
-                id="country_usa"
-                type="radio"
-                name="country"
-                value="usa"
-                checked
-              />USA
-            </label>
-            <label className={styles.labelRadio}>
-              <input
-                id="country_other"
-                type="radio"
-                name="country"
-                value="other"
-              />Other
-            </label>
-          </span>
-        </div>
-        {/* ZIP */}
-        <div className={styles.group}>
-          <span className={styles.labelWrapper}>
-            <label htmlFor="zip">Zip Code:</label>
-          </span>
-          <input id="zip" type="number" name="zip" className={styles.control} />
-        </div>
-        {/* SUBMIT */}
-        <div className={styles.submit}>
-          <input type="submit" value="Submit" />
-        </div>
-      </form>
-    </div>
-  )
+          {/* GENDER */}
+          <div className={styles.group}>
+            <span className={styles.labelWrapper}>
+              <label htmlFor="gender">Patient's Gender:</label>
+            </span>
+            <span className={styles.controlRadio}>
+              <label className={styles.labelRadio}>
+                <input
+                  checked
+                  onChange={e => this.handleChange(e, name)}
+                  id="gender_male"
+                  name="gender"
+                  type="radio"
+                  value="male"
+                />Male
+              </label>
+              <label className={styles.labelRadio}>
+                <input
+                  onChange={e => this.handleChange(e, name)}
+                  id="gender_female"
+                  name="gender"
+                  type="radio"
+                  value="female"
+                />Female
+              </label>
+            </span>
+          </div>
+
+          {/* AGE */}
+          {inputDiv({
+            handleChange: this.handleChange,
+            id: 'age',
+            labelText: `Patient's Age`,
+            type: 'number',
+            value: this.state.formData.age
+          })}
+
+          {/* SOURCE */}
+          {selectDiv({
+            handleChange: this.handleChange,
+            id: 'source',
+            labelText: 'Referral Source',
+            value: this.state.formData.source,
+            values: sources
+          })}
+
+          {/* INTERNET */}
+          {selectDiv({
+            handleChange: this.handleChange,
+            id: 'internet_sources',
+            labelText: 'Internet',
+            value: this.state.formData.internet_sources,
+            values: internetSources
+          })}
+
+          {/* OTHER */}
+          {inputDiv({
+            handleChange: this.handleChange,
+            id: 'other',
+            labelText: `Other`,
+            value: this.state.formData.other
+          })}
+
+          {/* DOCTOR */}
+          {selectDiv({
+            handleChange: this.handleChange,
+            id: 'doctor',
+            labelText: `Doctor`,
+            value: this.state.formData.doctor,
+            values: doctors
+          })}
+
+          {/* COUNTRY */}
+          <div className={styles.group}>
+            <span className={styles.labelWrapper}>
+              <label htmlFor="country">Country:</label>
+            </span>
+            <span className={styles.controlRadio}>
+              <label className={styles.labelRadio}>
+                <input
+                  checked
+                  onChange={e => this.handleChange(e, name)}
+                  id="country_usa"
+                  name="country"
+                  type="radio"
+                  value="usa"
+                />USA
+              </label>
+              <label className={styles.labelRadio}>
+                <input
+                  onChange={e => this.handleChange(e, name)}
+                  id="country_other"
+                  name="country"
+                  type="radio"
+                  value="other"
+                />Other
+              </label>
+            </span>
+          </div>
+
+          {/* ZIP */}
+          {inputDiv({
+            handleChange: this.handleChange,
+            id: 'zip',
+            labelText: `Zip Code`,
+            value: this.state.formData.zip
+          })}
+
+          {/* SUBMIT */}
+          <div className={styles.submit}>
+            <input type="submit" value="Submit" />
+          </div>
+        </form>
+      </div>
+    )
+  }
+
+  handleChange(e, id) {
+    this.setState({
+      formData: {
+        ...this.state.formData,
+        [`${id}`]: e.target.value
+      }
+    })
+  }
 }
 
-function getToday() {
-  return new Date().toISOString().substring(0, 10)
-}
+const inputDiv = ({
+  labelText,
+  id,
+  type = 'text',
+  value,
+  htmlFor,
+  handleChange
+}) =>
+  <div className={styles.group}>
+    <span className={styles.labelWrapper}>
+      <label htmlFor={id}>
+        {labelText}:
+      </label>
+    </span>
+    <input
+      id={id}
+      type={type}
+      name={id}
+      className={styles.control}
+      value={value}
+      onChange={e => handleChange(e, id)}
+    />
+  </div>
+
+const selectDiv = ({ labelText, id, value, values, handleChange }) =>
+  <div className={styles.group}>
+    <span className={styles.labelWrapper}>
+      <label htmlFor={id}>
+        {labelText}:
+      </label>
+    </span>
+    <select
+      name={id}
+      id={id}
+      value={value}
+      className={styles.controlSelect}
+      onChange={e => handleChange(e, name)}
+    >
+      {values.map(option =>
+        <option value={option} key={option}>
+          {option}
+        </option>
+      )}
+    </select>
+  </div>
+
+const getToday = () => new Date().toISOString().substring(0, 10)
 
 export default Form

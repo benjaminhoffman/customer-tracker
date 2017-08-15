@@ -1,5 +1,7 @@
 .formWrapper {
-  margin: 24px 300px 24px 200px;
+  margin: 24px;
+  display: flex;
+  justify-content: center;
 }
 
 .form {
@@ -20,9 +22,9 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  /*flex: 1 1 200px;*/
   margin-right: 24px;
   flex-basis: 180px;
+  width: 50%;
 }
 
 .labelRadio {
@@ -37,6 +39,7 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   height: 32px;
+  width: 50%;
 }
 
 .controlRadio {
