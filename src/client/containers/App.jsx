@@ -68,6 +68,12 @@ export default class AppContainer extends Component {
   onFormSubmit(e, formData) {
     e.preventDefault()
     console.log('formData', formData)
+    axios
+      .post('http://localhost:3001/api/new-patient', formData)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(e => console.log(e))
   }
 
   componentDidMount() {

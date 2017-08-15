@@ -18,6 +18,8 @@ simple web app to help service professionals track their business/customers
 # To do
 - react router
 - authentication
+- condition logic to form fields
+- make fields required*
 
 # Development
 `$ yarn install`
