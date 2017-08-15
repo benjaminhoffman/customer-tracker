@@ -1,6 +1,6 @@
 import React from 'react'
 import Login from './Login'
-import Form from './Form'
+import Form from './forms/Form'
 import Charts from './Charts'
 
 const Body = ({ activeTab, onLogin, onFormSubmit }) => {

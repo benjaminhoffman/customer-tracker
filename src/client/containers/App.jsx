@@ -67,8 +67,7 @@ export default class AppContainer extends Component {
 
   onFormSubmit(e, formData) {
     e.preventDefault()
-
-    console.log('submitted', formData)
+    console.log('formData', formData)
   }
 
   componentDidMount() {
