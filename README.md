@@ -15,6 +15,10 @@ simple web app to help service professionals track their business/customers
 - check your node version; should be `node v8.1.4`
 - use yarn; try `npm install yarn -g`
 
+# To do
+- react router
+- authentication
+
 # Development
 `$ yarn install`
 `$ yarn start`
