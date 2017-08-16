@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Chart from './charts/Chart'
 import AreaChart from './charts/AreaChart'
+import ComposedBarChart from './charts/ComposedBarChart'
 import axios from 'axios'
 
 class Charts extends Component {
@@ -12,7 +13,8 @@ class Charts extends Component {
   render() {
     return (
       <div>
-        <AreaChart />
+        <ComposedBarChart data={this.state.data} />
+        <AreaChart data={this.state.data} />
         <Chart />
       </div>
     )
