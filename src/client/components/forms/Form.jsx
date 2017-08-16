@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styles from './Form.css'
-import { sources, channel, doctors, radios } from './CONSTANTS'
+import { sources, channels, doctors, radios } from '../../CONSTANTS'
 import Text from './Text'
 import Select from './Select'
 import Radio from './Radio'
@@ -86,7 +86,7 @@ class Form extends Component {
               id="channel"
               labelText="Internet"
               value={this.state.formData.channel}
-              values={channel}
+              values={channels}
             />}
 
           {/* OTHER */}

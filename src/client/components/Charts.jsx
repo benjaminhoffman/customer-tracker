@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import Chart from './charts/Chart'
-import AreaChart from './charts/AreaChart'
+import get from 'lodash.get'
 import ComposedBarChart from './charts/ComposedBarChart'
 import axios from 'axios'
 
@@ -13,9 +12,18 @@ class Charts extends Component {
   render() {
     return (
       <div>
-        <ComposedBarChart data={this.state.data} />
-        <AreaChart data={this.state.data} />
-        <Chart />
+        <ComposedBarChart
+          chartTheme="doctors"
+          data={get(this.state, 'data.total')}
+        />
+        <ComposedBarChart
+          chartTheme="sources"
+          data={get(this.state, 'data.source')}
+        />
+        <ComposedBarChart
+          chartTheme="channels"
+          data={get(this.state, 'data.channel')}
+        />
       </div>
     )
   }

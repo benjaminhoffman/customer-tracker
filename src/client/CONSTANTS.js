@@ -3,13 +3,13 @@ const sources = [
   'Cedars',
   'Internet',
   'Insurance',
-  'Family',
+  'Friend',
   'Lapeer',
   'Saban',
   'Other'
 ]
 
-const channel = ['Bing', 'Google', 'Yahoo', 'Yelp', 'Other']
+const channels = ['Bing', 'Google', 'Yahoo', 'Yelp', 'Other']
 
 const doctors = ['gh', 'ef', 'lc']
 
@@ -48,4 +48,21 @@ const radios = {
   ]
 }
 
-export { sources, channel, doctors, radios }
+const chartColors = {
+  gh: '#8884d8',
+  ef: '#82ca9d',
+  lc: '#ff6699',
+  Physician: '#8884d8',
+  Cedars: '#82ca9d',
+  Internet: '#ff6699',
+  Insurance: '#4286f4',
+  Friend: '#e2f441',
+  Lapeer: '#f47041',
+  Saban: '#7f41f4',
+  Other: '#09f94d',
+  Bing: '#f9b809',
+  Google: '#82807b',
+  Yahoo: '#af95ac',
+  Yelp: '#af95ac'
+}
+export { sources, channels, doctors, radios, chartColors }
