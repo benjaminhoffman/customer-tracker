@@ -10,7 +10,7 @@ export default class AppContainer extends Component {
 
     this.onTabClick = this.onTabClick.bind(this)
     this.onLogin = this.onLogin.bind(this)
-    this.onFormSubmit = this.onFormSubmit.bind(this)
+    this.onNewEntrySubmit = this.onNewEntrySubmit.bind(this)
 
     this.state = {
       tabs: [
@@ -19,8 +19,8 @@ export default class AppContainer extends Component {
           value: 'login'
         },
         {
-          name: 'Form',
-          value: 'form'
+          name: 'New Entry',
+          value: 'entry'
         },
         {
           name: 'Entries',
@@ -48,7 +48,7 @@ export default class AppContainer extends Component {
           className={styles.body}
           activeTab={this.state.activeTab}
           onLogin={this.onLogin}
-          onFormSubmit={this.onFormSubmit}
+          onNewEntrySubmit={this.onNewEntrySubmit}
         />
       </div>
     )
@@ -60,12 +60,13 @@ export default class AppContainer extends Component {
     })
   }
 
-  onLogin(e) {
+  onLogin(e, data) {
     e.preventDefault()
+    console.log(data)
     console.log('submitted')
   }
 
-  onFormSubmit(e, formData) {
+  onNewEntrySubmit(e, formData) {
     e.preventDefault()
     console.log('formData', formData)
     axios
