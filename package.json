@@ -14,7 +14,7 @@
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "prod": "NODE_ENV=production node ./src/server/server.js",
     "postinstall": "webpack -p",
-    "build": "webpack"
+    "build": "node node_modules/webpack/bin/webpack.js"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -46,9 +46,6 @@
     "path": "^0.12.7",
     "postcss-loader": "^2.0.6",
     "prettier": "^1.5.3",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-router-dom": "^4.1.2",
     "style-loader": "^0.18.2",
     "webpack": "^3.3.0",
     "webpack-dev-server": "^2.5.1",
@@ -62,6 +59,9 @@
     "lodash.get": "^4.4.2",
     "moment": "^2.18.1",
     "mongodb": "^2.2.30",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-router-dom": "^4.1.2",
     "recharts": "^1.0.0-alpha.2"
   },
   "eslintConfig": {
