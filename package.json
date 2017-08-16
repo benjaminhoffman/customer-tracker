@@ -8,12 +8,10 @@
   "license": "MIT",
   "proxy": "http://localhost:3001/",
   "scripts": {
-    "build": "webpack",
-    "dev": "nodemon src/server/server.js",
-    "precommit": "lint-staged",
-    "prod": "webpack -p",
-    "start": "webpack && webpack-dev-server --open",
-    "watch": "webpack --watch"
+    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "prod": "NODE_ENV=production node ./src/server/server.js",
+    "postinstall": "webpack -p",
+    "build": "webpack"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
