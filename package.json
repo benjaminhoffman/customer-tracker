@@ -13,8 +13,8 @@
   "scripts": {
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "prod": "NODE_ENV=production node ./src/server/server.js",
-    "postinstall": "node ./node_modules/webpack/bin/webpack.js -p",
-    "build": "node ./node_modules/webpack/bin/webpack.js"
+    "postinstall": "node node_modules/webpack/bin/webpack.js -p",
+    "build": "node node_modules/webpack/bin/webpack.js"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
