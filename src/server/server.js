@@ -57,7 +57,7 @@ router.get('/chart-data', (req, res) => {
   axios
     .get(firebaseUrl2)
     .then(result => {
-      const results = limitResults('2017-07-01', moment().format(), result.data)
+      const results = limitResults('2017-01-01', moment().format(), result.data)
       const formattedData = formatData(results)
       res.send(formattedData)
     })
