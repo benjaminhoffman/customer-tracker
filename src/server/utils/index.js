@@ -21,8 +21,9 @@ const limitResults = (start, end, data) => {
 }
 
 /*
-our charts require an array of objects
-this utility method formats the data to what our charts expect
+our charts require an array of objects as the output
+so this method iterates over each entry in our db
+and formats the data to what our charts expect
 input:
   {
     entryId: {
@@ -37,13 +38,13 @@ input:
 
 output: [
   {
-    month: 2017-01-01,
+    month: 2017-01,
     bh: 450,
     fg: 200,
     pw: 900
   },
   {
-    month: 2017-02-01,
+    month: 2017-02,
     ...
   }
 ]
@@ -51,24 +52,39 @@ output: [
 
 const formatData = data => {
   // collect all the data, with months as the keys
-  const dataByMonth = {}
+  let dataByMonthTotal = {}
+  let dataByMonthSource = {}
+  let dataByMonthChannel = {}
+
+  // data is an obj of "customers": each key is a custID
+  // and the value is the customer info
   for (const key in data) {
     const month = data[key].date.slice(0, 7)
-    // set our month obj if it doesnt exist yet
-    if (!dataByMonth[month]) {
-      dataByMonth[month] = { month }
-    }
-    // first check if doctor has had a patient yet in this month
-    // if no, then set their count to 1, otherwise increment it
     const doctor = data[key].doctor
-    if (!dataByMonth[month][doctor]) dataByMonth[month][doctor] = 1
-    else dataByMonth[month][doctor]++
-
-    // keep a running total of _all_ patients
-    if (!dataByMonth[month].total) dataByMonth[month].total = 1
-    else dataByMonth[month].total++
+    const source = data[key].source
+    const channel = data[key].channel
+    dataByMonthTotal = createDataByMonthObject(dataByMonthTotal, month, doctor)
+    dataByMonthSource = createDataByMonthObject(
+      dataByMonthSource,
+      month,
+      source
+    )
+    if (data[key].source === 'Internet')
+      dataByMonthChannel = createDataByMonthObject(
+        dataByMonthChannel,
+        month,
+        channel
+      )
   }
-  // export our object to an array of object months (2017-01, 2017-02, etc)
+  // export an object that holds sorted arrays
+  return {
+    total: getDataByMonthSortedArray(dataByMonthTotal),
+    source: getDataByMonthSortedArray(dataByMonthSource),
+    channel: getDataByMonthSortedArray(dataByMonthChannel)
+  }
+}
+
+const getDataByMonthSortedArray = dataByMonth => {
   return Object.keys(dataByMonth)
     .map(month => dataByMonth[month]) // convert ea month into an array element
     .sort((a, b) => {
@@ -76,6 +92,26 @@ const formatData = data => {
       if (a.month < b.month) return -1
       else return 1
     })
+}
+
+/*
+increment our count each time an entry in our db matches the key
+*/
+const createDataByMonthObject = (obj, month, key) => {
+  // set our nested month obj if it doesnt exist yet
+  if (!obj[month]) {
+    obj[month] = { month }
+  }
+
+  // then check if key exists for this particular month
+  // if no, then set its count to 1, otherwise increment it
+  if (!obj[month][key]) obj[month][key] = 1
+  else obj[month][key]++
+
+  // finally, keep a running total
+  if (!obj[month].Total) obj[month].Total = 1
+  else obj[month].Total++
+  return obj
 }
 
 module.exports = {

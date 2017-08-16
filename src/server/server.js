@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
   res.json({ message: 'API Initialized!' })
 })
 
-// TODO add async/await
+// TODO add async/await support
 router.post('/new-patient', jsonParser, (req, res) => {
   if (!req.body) return res.sendStatus(400)
   axios
@@ -47,7 +47,6 @@ router.post('/new-patient', jsonParser, (req, res) => {
       console.log(e.response.status)
       console.log(e.message)
       // TODO send some message back to the client
-
       // TODO send this to logger somewhere, etc....
       // console.log(e)
     })
@@ -72,24 +71,3 @@ router.get('/chart-data', (req, res) => {
 app.listen(port, () => {
   console.log(`api running on port ${port}`)
 })
-
-// app.use(bodyParser.urlencoded({ extended: true }))
-// app.use(bodyParser.json())
-
-// To prevent errors from Cross Origin Resource Sharing, we will set
-// our headers to allow CORS with middleware like so:
-// app.use(function(req, res, next) {
-//   res.setHeader(`Access-Control-Allow-Origin`, `*`)
-//   res.setHeader(`Access-Control-Allow-Credentials`, `true`)
-//   res.setHeader(
-//     `Access-Control-Allow-Methods`,
-//     `GET,HEAD,OPTIONS,POST,PUT,DELETE`
-//   )
-//   res.setHeader(
-//     `Access-Control-Allow-Headers`,
-//     `Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers`
-//   )
-//   // and remove caching so we get the most recent comments
-//   res.setHeader(`Cache-Control`, `no-cache`)
-//   next()
-// })
