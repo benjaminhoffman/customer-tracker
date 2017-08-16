@@ -1,5 +1,9 @@
-# customer-tracker
-simple web app to help service professionals track their business/customers.  right now it's geared towards medical practices (i.e. physician private practices) but the use case to wider than just that.
+# Patient Tracker
+A simple web app to help service professionals (i.e. physicians) track their customers (i.e. patient) referrals. Said another why, this app helps professionals answer the question, _"where do I get most my customers from?"_
+
+# Deploy
+Push to master branch and app will autodeploy via heroku.
+- https://patient-tracker-2017.herokuapp.com/
 
 # Stack
 ### client
@@ -20,11 +24,11 @@ simple web app to help service professionals track their business/customers.  ri
 - use yarn; try `npm install yarn -g`
 
 # To do
-- react router
-- authentication
-- condition logic to form fields
-- make fields required*
-- proptypes, defaultProps, displayName
+- [x] react router
+- [ ] authentication
+- [x] conditional logic to form fields
+- [ ] make fields required*
+- [ ] proptypes, defaultProps, displayName
 
 # Development
 ```bash
