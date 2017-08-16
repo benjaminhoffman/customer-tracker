@@ -7,6 +7,9 @@
   "author": "Benjamin <bhoffman8@gmail.com>",
   "license": "MIT",
   "proxy": "http://localhost:3001/",
+  "engines": {
+    "node": "8.x.x"
+  },
   "scripts": {
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "prod": "NODE_ENV=production node ./src/server/server.js",
