@@ -1,31 +1,46 @@
 import React from 'react'
+import * as constants from '../../CONSTANTS'
 import {
-  ComposedChart,
-  XAxis,
-  YAxis,
-  CartesianGrid,
   Bar,
-  Tooltip,
+  // Brush,   // use me to control date slider
+  CartesianGrid,
+  ComposedChart,
   Legend,
-  Line
+  Line,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis
 } from 'recharts'
 
-const ComposedBarChart = ({ data }) =>
-  <ComposedChart
-    width={600}
-    height={300}
-    data={data}
-    margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-  >
-    <XAxis dataKey="month" />
-    <YAxis />
-    <CartesianGrid strokeDasharray="3 3" />
-    <Tooltip />
-    <Legend />
-    <Bar dataKey="gh" stackId="a" fill="#8884d8" />
-    <Bar dataKey="ef" stackId="a" fill="#82ca9d" />
-    <Bar dataKey="lc" stackId="a" fill="#ff6699" />
-    <Line type="monotone" dataKey="total" stackId="a" fill="#000000" />
-  </ComposedChart>
+const ComposedBarChart = ({ data, chartTheme }) => {
+  return (
+    <ResponsiveContainer height={600} width="100%">
+      <ComposedChart
+        data={data}
+        margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+        syncId="sync"
+      >
+        <XAxis dataKey="month" />
+        <YAxis />
+        <CartesianGrid strokeDasharray="3 3" />
+        <Tooltip />
+        <Legend />
+        {/* map allows us to keep this module dynamic + keeps colors consistent */}
+        {(constants[chartTheme] || []).map(val => {
+          return (
+            <Bar
+              dataKey={val}
+              key={val}
+              stackId="a"
+              fill={constants.chartColors[val]}
+            />
+          )
+        })}
+        <Line type="monotone" dataKey="Total" fill="#000000" />
+      </ComposedChart>
+    </ResponsiveContainer>
+  )
+}
 
 export default ComposedBarChart
