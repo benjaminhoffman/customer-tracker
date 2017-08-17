@@ -62,29 +62,19 @@ export default class AppContainer extends Component {
 
   onLogin(e, data) {
     e.preventDefault()
-    console.log(data)
-    console.log('submitted')
+    // TODO authentication
   }
 
   onNewEntrySubmit(e, formData) {
     e.preventDefault()
-    console.log('formData', formData)
     axios
       .post('http://localhost:3001/api/new-patient', formData)
       .then(res => {
-        console.log(res)
-      })
-      .catch(e => console.log(e))
-  }
-
-  componentDidMount() {
-    console.log('Mounted!')
-    axios
-      .get('http://localhost:3001/api')
-      .then(res => {
-        console.log('res', res)
+        // TODO show success message to user
       })
       .catch(e => {
+        // TODO capture err
+        // TODO inform user that their entry did _not_ submit
         console.log(e)
       })
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styles from './forms/Form.css'
+import styles from './NewEntry.css'
 import { sources, channels, doctors, radios } from '../CONSTANTS'
 import Text from './forms/Text'
 import Select from './forms/Select'
@@ -31,105 +31,103 @@ class Form extends Component {
   render() {
     const { onNewEntrySubmit } = this.props
     return (
-      <div className={styles.formWrapper}>
-        <form
-          className={styles.form}
-          onSubmit={e => onNewEntrySubmit(e, this.state.formData)}
-        >
-          {/* DATE */}
-          <Text
-            handleChange={this.handleChange}
-            id="date"
-            labelText="Date of Appointment"
-            type="date"
-            value={this.state.formData.date}
-          />
+      <form
+        className={styles.form}
+        onSubmit={e => onNewEntrySubmit(e, this.state.formData)}
+      >
+        {/* DATE */}
+        <Text
+          handleChange={this.handleChange}
+          id="date"
+          labelText="Date of Appointment"
+          type="date"
+          value={this.state.formData.date}
+        />
 
-          {/* INITIALS */}
-          <Text
-            handleChange={this.handleChange}
-            id="initials"
-            labelText={`Patient's Initials`}
-            value={this.state.formData.initials}
-          />
+        {/* INITIALS */}
+        <Text
+          handleChange={this.handleChange}
+          id="initials"
+          labelText={`Patient's Initials`}
+          value={this.state.formData.initials}
+        />
 
-          {/* GENDER */}
-          <Radio
-            htmlFor="gender"
-            labelText={`Patient's Gender`}
-            handleChange={this.handleChange}
-            radios={radios.gender}
-            checkedRadio={this.state.formData.gender}
-          />
+        {/* GENDER */}
+        <Radio
+          htmlFor="gender"
+          labelText={`Patient's Gender`}
+          handleChange={this.handleChange}
+          radios={radios.gender}
+          checkedRadio={this.state.formData.gender}
+        />
 
-          {/* AGE */}
-          <Text
-            handleChange={this.handleChange}
-            id="age"
-            labelText={`Patient's Age`}
-            type="number"
-            value={this.state.formData.age}
-          />
+        {/* AGE */}
+        <Text
+          handleChange={this.handleChange}
+          id="age"
+          labelText={`Patient's Age`}
+          type="number"
+          value={this.state.formData.age}
+        />
 
-          {/* SOURCE */}
+        {/* SOURCE */}
+        <Select
+          handleChange={this.handleChange}
+          id="source"
+          labelText="Referral Source"
+          value={this.state.formData.source}
+          values={sources}
+        />
+
+        {/* INTERNET */}
+        {this.state.formData.source === 'Internet' &&
           <Select
             handleChange={this.handleChange}
-            id="source"
-            labelText="Referral Source"
-            value={this.state.formData.source}
-            values={sources}
-          />
+            id="channel"
+            labelText="Internet"
+            value={this.state.formData.channel}
+            values={channels}
+          />}
 
-          {/* INTERNET */}
-          {this.state.formData.source === 'Internet' &&
-            <Select
-              handleChange={this.handleChange}
-              id="channel"
-              labelText="Internet"
-              value={this.state.formData.channel}
-              values={channels}
-            />}
-
-          {/* OTHER */}
-          {this.state.formData.source === 'Other' &&
-            <Text
-              handleChange={this.handleChange}
-              id="other"
-              labelText="Other"
-              value={this.state.formData.other}
-            />}
-
-          {/* DOCTOR */}
-          <Select
-            handleChange={this.handleChange}
-            id="doctor"
-            labelText="Doctor"
-            value={this.state.formData.doctor}
-            values={doctors}
-          />
-
-          {/* COUNTRY */}
-          <Radio
-            htmlFor="country"
-            labelText="Country"
-            handleChange={this.handleChange}
-            radios={radios.country}
-            checkedRadio={this.state.formData.country}
-          />
-
-          {/* ZIP */}
+        {/* OTHER */}
+        {this.state.formData.source === 'Other' &&
           <Text
             handleChange={this.handleChange}
-            id="zip"
-            labelText={`Zip Code`}
-            type="number"
-            value={this.state.formData.zip}
-          />
+            id="other"
+            labelText="Other"
+            value={this.state.formData.other}
+          />}
 
-          {/* SUBMIT */}
-          <Submit />
-        </form>
-      </div>
+        {/* DOCTOR */}
+        <Select
+          handleChange={this.handleChange}
+          id="doctor"
+          labelText="Doctor"
+          value={this.state.formData.doctor}
+          values={doctors}
+        />
+
+        {/* COUNTRY */}
+        <Radio
+          htmlFor="country"
+          labelText="Country"
+          handleChange={this.handleChange}
+          radios={radios.country}
+          checkedRadio={this.state.formData.country}
+        />
+
+        {/* ZIP */}
+        <Text
+          handleChange={this.handleChange}
+          id="zip"
+          labelText={`Zip Code`}
+          type="number"
+          value={this.state.formData.zip}
+        />
+
+        {/* SUBMIT */}
+        <Submit />
+      </form>
     )
   }
 

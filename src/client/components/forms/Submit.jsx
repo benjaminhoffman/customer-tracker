@@ -3,7 +3,7 @@ import styles from './Form.css'
 
 const Submit = () => {
   return (
-    <div className={styles.submit}>
+    <div className={styles.group}>
       <input type="submit" value="Submit" />
     </div>
   )

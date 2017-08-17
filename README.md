@@ -1,8 +1,19 @@
-# Patient Tracker
-A simple web app to help service professionals (i.e. physicians) track their customers (i.e. patients). Said another way, this app helps professionals answer the question, _"where do I get most my customers from?"_
+# Client / Patient Tracker
+A simple web app to help service professionals (i.e. lawyers, physicians) track how they acquire clients / patients. Said another way, this app helps professionals answer the question, _"where do I get most my customers from?"_
 
 # Development
-All commits have a linter precommit hook.  We also use `prettier` for code formatting.
+
+### client
+- react 15
+- webpack 3
+- es6 via babel 6
+- css modules
+- eslint/standard & prettier for linting & code quality
+
+### server
+- node 8.1.6
+- express 4
+- firebase for db
 
 ## Pre-reqs
 - check your node version; should be `node v8.1.4`
@@ -11,32 +22,16 @@ All commits have a linter precommit hook.  We also use `prettier` for code forma
 ## Run locally
 ```bash
 $ yarn install
-$ yarn start
-in a new window:
-$ yarn dev
+$ yarn client
 http://localhost:8080
 ```
-
-
-# Deploy
-Push to master branch and app will autodeploy via heroku.
-- https://customer-tracker-2017.herokuapp.com/
-
-# Stack
-
-### client
-- react w/ es6 via babel & webpack
-- css modules
-- standard/eslint for linting & prettier for formatting
-
-### server
-- node & express
-- firebase for db
 
 # Principles
 1. colocate files, including CSS, tests, etc
 2. css modules should be imported via style-loader & css-loader
-3. JSX files have `.jsx` extension for better atom plugin support & syntax highlighting
+3. JSX files have `.jsx` extension
+4. one component, one file
+5. dont block the event loop!
 
 # To do
 - [x] react router
@@ -46,3 +41,6 @@ Push to master branch and app will autodeploy via heroku.
 - [ ] proptypes, defaultProps, displayName
 - [ ] deploy to heroku
 - [ ] moar graphs!
+- [ ] redux
+- [ ] loading spinner
+-

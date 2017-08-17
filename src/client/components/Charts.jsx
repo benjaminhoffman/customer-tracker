@@ -28,9 +28,9 @@ class Charts extends Component {
     )
   }
 
-  componentWillMount() {
-    console.log('chart comp mounted!')
-
+  componentDidMount() {
+    // load data after page mounts
+    // ie dont block the page render!
     axios
       .get('http://localhost:3001/api/chart-data')
       .then(({ data }) => {
@@ -40,7 +40,7 @@ class Charts extends Component {
         })
       })
       .catch(e => {
-        // TODO do something
+        // TODO capture error
         console.log(e)
       })
   }
