@@ -1,5 +1,11 @@
+@font-face {
+  font-family: 'Raleway-Medium';
+  src: url('./Raleway-Medium.ttf') format('truetype'); /* Safari, Android, iOS */
+  src: url('Raleway-Medium.woff') format('woff');
+}
+
 .page {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Raleway-Medium', Fallback, sans-serif;
   display: flex;
   margin: 25px;
   flex-direction: column;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Tabs from '../components/Tabs'
+import Header from '../components/Header'
 import Body from '../components/Body'
 import styles from './App.css'
 import axios from 'axios'
@@ -38,7 +38,7 @@ export default class AppContainer extends Component {
   render() {
     return (
       <div className={styles.page}>
-        <Tabs
+        <Header
           className={styles.tabs}
           tabs={this.state.tabs}
           onTabClick={this.onTabClick}
