@@ -13,6 +13,8 @@ const channels = ['Bing', 'Google', 'Yahoo', 'Yelp', 'Other']
 
 const doctors = ['gh', 'ef', 'lc']
 
+const percentages = ['doctors (%)', 'sources (%)', 'channels (%)']
+
 const radios = {
   gender: [
     {
@@ -65,4 +67,5 @@ const chartColors = {
   Yahoo: '#af95ac',
   Yelp: '#af95ac'
 }
-export { sources, channels, doctors, radios, chartColors }
+
+export { sources, channels, doctors, radios, chartColors, percentages }

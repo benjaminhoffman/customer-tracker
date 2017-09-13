@@ -1,0 +1,17 @@
+.charts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 36px;
+}
+
+.chart {
+  width: 500px;
+  margin: 12px;
+}
+
+.title {
+  text-align: center;
+  margin: 8px 0;
+}

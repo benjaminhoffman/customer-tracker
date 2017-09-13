@@ -12,10 +12,11 @@ import {
   XAxis,
   YAxis
 } from 'recharts'
+// import styles from './Charts.css'
 
 const ComposedBarChart = ({ data, chartTheme }) => {
   return (
-    <ResponsiveContainer height={600} width="100%">
+    <ResponsiveContainer height={300} width="100%">
       <ComposedChart
         data={data}
         margin={{ top: 20, right: 30, left: 20, bottom: 5 }}

@@ -5,6 +5,8 @@ const webpack = require('webpack')
 const Merge = require('webpack-merge')
 const env = process.env.NODE_ENV || 'development'
 const ManifestPlugin = require('webpack-manifest-plugin')
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+// const DashboardPlugin = require('webpack-dashboard/plugin')
 
 const isProductionLike = env === 'production' || env === 'staging'
 
@@ -37,6 +39,13 @@ const common = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     sourceMapFilename: 'bundle.map'
+  },
+  externals: {
+    cheerio: 'window',
+    'react/addons': true,
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true,
+    'react-addons-test-utils': 'react-dom'
   },
   module: {
     rules: [
@@ -100,11 +109,15 @@ const development = Merge(common, {
   plugins: [
     new CleanWebpackPlugin(['dist']), // replace dist dir on each new build
     new webpack.HotModuleReplacementPlugin() // Enable HMR
+    // new BundleAnalyzerPlugin() // outputs bundle size at http://127.0.0.1:8888/
+    // TODO:
+    // new DashboardPlugin({ port: 8080 })   // https://github.com/FormidableLabs/webpack-dashboard
   ],
   devServer: {
     hot: true, // use HMR
     contentBase: path.resolve(__dirname, 'dist'),
-    publicPath: '/'
+    publicPath: '/',
+    historyApiFallback: true
   }
 })
 

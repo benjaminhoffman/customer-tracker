@@ -3,8 +3,12 @@ import Header from '../components/Header'
 import Body from '../components/Body'
 import styles from './App.css'
 import axios from 'axios'
+// import { logger } from 'redux-logger'
+import updateNewEntryField from '../actions/NewEntryForm'
+import store from '../store'
+import { connect } from 'react-redux'
 
-export default class AppContainer extends Component {
+class AppContainer extends Component {
   constructor(props) {
     super(props)
 
@@ -14,22 +18,10 @@ export default class AppContainer extends Component {
 
     this.state = {
       tabs: [
-        {
-          name: 'Login',
-          value: 'login'
-        },
-        {
-          name: 'New Entry',
-          value: 'entry'
-        },
-        {
-          name: 'Entries',
-          value: 'entries'
-        },
-        {
-          name: 'Charts',
-          value: 'charts'
-        }
+        { name: 'Login', value: 'login' },
+        { name: 'New Entry', value: 'entry' },
+        { name: 'Entries', value: 'entries' },
+        { name: 'Charts', value: 'charts' }
       ],
       activeTab: 'form'
     }
@@ -39,7 +31,7 @@ export default class AppContainer extends Component {
     return (
       <div className={styles.page}>
         <Header
-          className={styles.tabs}
+          className={styles.header}
           tabs={this.state.tabs}
           onTabClick={this.onTabClick}
           activeTab={this.state.activeTab}
@@ -47,7 +39,9 @@ export default class AppContainer extends Component {
         <Body
           className={styles.body}
           activeTab={this.state.activeTab}
+          newEntryFields={this.props.newEntry}
           onLogin={this.onLogin}
+          onFormChange={this.props.onFormChange}
           onNewEntrySubmit={this.onNewEntrySubmit}
         />
       </div>
@@ -65,12 +59,15 @@ export default class AppContainer extends Component {
     // TODO authentication
   }
 
-  onNewEntrySubmit(e, formData) {
+  onNewEntrySubmit(e) {
     e.preventDefault()
+    const formData = store.getState().newEntry
+    console.log(formData)
     axios
-      .post('http://localhost:3001/api/new-patient', formData)
+      .post('http://localhost:3001/api/new-entry', formData)
       .then(res => {
         // TODO show success message to user
+        alert('submitted!')
       })
       .catch(e => {
         // TODO capture err
@@ -79,3 +76,16 @@ export default class AppContainer extends Component {
       })
   }
 }
+
+const mapStateToProps = state => {
+  return { ...state }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onFormChange: e =>
+      dispatch(updateNewEntryField({ [`${e.target.name}`]: e.target.value }))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer)

@@ -1,109 +1,99 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styles from './NewEntry.css'
 import { sources, channels, doctors, radios } from '../CONSTANTS'
 import Text from './forms/Text'
 import Select from './forms/Select'
 import Radio from './forms/Radio'
 import Submit from './forms/Submit'
+import PropTypes from 'prop-types'
 
-const getToday = () => new Date().toISOString().substring(0, 10)
-
-class Form extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      formData: {
-        age: '',
-        country: 'USA',
-        date: getToday(),
-        doctor: '',
-        gender: 'male',
-        initials: '',
-        channel: '',
-        other: '',
-        source: '',
-        zip: ''
-      }
-    }
-    this.handleChange = this.handleChange.bind(this)
-  }
-
-  render() {
-    const { onNewEntrySubmit } = this.props
-    return (
-      <form
-        className={styles.form}
-        onSubmit={e => onNewEntrySubmit(e, this.state.formData)}
-      >
+const Form = ({ newEntryFields, onFormChange, onNewEntrySubmit }) => {
+  const {
+    date,
+    initials,
+    gender,
+    age,
+    source,
+    channel,
+    other,
+    doctor,
+    country,
+    zip
+  } = newEntryFields
+  return (
+    <div className={styles.formWrapper} aria-label="New Entry Form">
+      <form className={styles.form} onSubmit={onNewEntrySubmit}>
         {/* DATE */}
         <Text
-          handleChange={this.handleChange}
+          handleChange={onFormChange}
           id="date"
-          labelText="Date of Appointment"
+          labelText="Date"
           type="date"
-          value={this.state.formData.date}
+          value={date}
         />
 
         {/* INITIALS */}
         <Text
-          handleChange={this.handleChange}
+          handleChange={onFormChange}
           id="initials"
           labelText={`Patient's Initials`}
-          value={this.state.formData.initials}
+          value={initials}
         />
 
         {/* GENDER */}
         <Radio
           htmlFor="gender"
           labelText={`Patient's Gender`}
-          handleChange={this.handleChange}
+          handleChange={onFormChange}
           radios={radios.gender}
-          checkedRadio={this.state.formData.gender}
+          checkedRadio={gender}
         />
 
         {/* AGE */}
         <Text
-          handleChange={this.handleChange}
+          handleChange={onFormChange}
           id="age"
           labelText={`Patient's Age`}
           type="number"
-          value={this.state.formData.age}
+          value={age}
         />
 
         {/* SOURCE */}
         <Select
-          handleChange={this.handleChange}
+          handleChange={onFormChange}
           id="source"
           labelText="Referral Source"
-          value={this.state.formData.source}
+          value={source}
           values={sources}
         />
 
         {/* INTERNET */}
-        {this.state.formData.source === 'Internet' &&
+        {source === 'Internet' && (
           <Select
-            handleChange={this.handleChange}
+            handleChange={onFormChange}
             id="channel"
             labelText="Internet"
-            value={this.state.formData.channel}
+            value={channel}
             values={channels}
-          />}
+          />
+        )}
 
         {/* OTHER */}
-        {this.state.formData.source === 'Other' &&
+        {source === 'Other' && (
           <Text
-            handleChange={this.handleChange}
+            handleChange={onFormChange}
             id="other"
             labelText="Other"
-            value={this.state.formData.other}
-          />}
+            value={other}
+          />
+        )}
 
         {/* DOCTOR */}
         <Select
-          handleChange={this.handleChange}
+          handleChange={onFormChange}
           id="doctor"
           labelText="Doctor"
-          value={this.state.formData.doctor}
+          value={doctor}
           values={doctors}
         />
 
@@ -111,49 +101,40 @@ class Form extends Component {
         <Radio
           htmlFor="country"
           labelText="Country"
-          handleChange={this.handleChange}
+          handleChange={onFormChange}
           radios={radios.country}
-          checkedRadio={this.state.formData.country}
+          checkedRadio={country}
         />
 
         {/* ZIP */}
         <Text
-          handleChange={this.handleChange}
+          handleChange={onFormChange}
           id="zip"
           labelText={`Zip Code`}
           type="number"
-          value={this.state.formData.zip}
+          value={zip}
         />
 
         {/* SUBMIT */}
         <Submit />
       </form>
-    )
-  }
-
-  handleChange(e) {
-    const value = formatValue(e.target.name, e.target.value)
-    this.setState({
-      formData: {
-        ...this.state.formData,
-        [`${e.target.name}`]: value
-      }
-    })
-  }
+    </div>
+  )
 }
 
-// helper func; format form values to match what db expects
-const formatValue = (name, val) => {
-  switch (name) {
-    case 'initials':
-      return val.toUpperCase().slice(0, 2)
-    case 'zip':
-      return val.slice(0, 5)
-    case 'age':
-      return val.slice(0, 2)
-    default:
-      return val
-  }
+Form.displayName = 'New Entry Form'
+
+Form.propTypes = {
+  age: PropTypes.string,
+  country: PropTypes.string,
+  date: PropTypes.string,
+  doctor: PropTypes.string,
+  gender: PropTypes.string,
+  initials: PropTypes.string,
+  channel: PropTypes.string,
+  other: PropTypes.string,
+  source: PropTypes.string,
+  zip: PropTypes.string
 }
 
 export default Form

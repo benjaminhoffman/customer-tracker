@@ -35,7 +35,6 @@ input:
     },
     entryId2: { ... }
   }
-
 output: [
   {
     month: 2017-01,
@@ -52,9 +51,9 @@ output: [
 
 const formatData = data => {
   // collect all the data, with months as the keys
-  let dataByMonthTotal = {}
-  let dataByMonthSource = {}
-  let dataByMonthChannel = {}
+  let dataByMonthDoctors = {}
+  let dataByMonthSources = {}
+  let dataByMonthChannels = {}
 
   // data is an obj of "customers": each key is a custID
   // and the value is the customer info
@@ -63,40 +62,52 @@ const formatData = data => {
     const doctor = data[key].doctor
     const source = data[key].source
     const channel = data[key].channel
-    dataByMonthTotal = createDataByMonthObject(dataByMonthTotal, month, doctor)
-    dataByMonthSource = createDataByMonthObject(
-      dataByMonthSource,
+    dataByMonthDoctors = createDataByMonthObject(
+      dataByMonthDoctors,
+      month,
+      doctor
+    )
+    dataByMonthSources = createDataByMonthObject(
+      dataByMonthSources,
       month,
       source
     )
-    if (data[key].source === 'Internet')
-      dataByMonthChannel = createDataByMonthObject(
-        dataByMonthChannel,
+    if (data[key].source === 'Internet') {
+      dataByMonthChannels = createDataByMonthObject(
+        dataByMonthChannels,
         month,
         channel
       )
+    }
   }
+
+  // convert our data into percentages to make a stacked graph
+  const dataByMonthDoctorsPercentage = convertMonthlyDataIntoPercentage(
+    dataByMonthDoctors
+  )
+  const dataByMonthSourcesPercentage = convertMonthlyDataIntoPercentage(
+    dataByMonthSources
+  )
+  const dataByMonthChannelsPercentage = convertMonthlyDataIntoPercentage(
+    dataByMonthChannels
+  )
+
   // export an object that holds sorted arrays
   return {
-    total: getDataByMonthSortedArray(dataByMonthTotal),
-    source: getDataByMonthSortedArray(dataByMonthSource),
-    channel: getDataByMonthSortedArray(dataByMonthChannel)
+    doctors: getDataByMonthSortedArray(dataByMonthDoctors),
+    'doctors (%)': getDataByMonthSortedArray(dataByMonthDoctorsPercentage),
+    sources: getDataByMonthSortedArray(dataByMonthSources),
+    'sources (%)': getDataByMonthSortedArray(dataByMonthSourcesPercentage),
+    channels: getDataByMonthSortedArray(dataByMonthChannels),
+    'channels (%)': getDataByMonthSortedArray(dataByMonthChannelsPercentage)
   }
-}
-
-const getDataByMonthSortedArray = dataByMonth => {
-  return Object.keys(dataByMonth)
-    .map(month => dataByMonth[month]) // convert ea month into an array element
-    .sort((a, b) => {
-      // sort so chart data is ascending by date
-      if (a.month < b.month) return -1
-      else return 1
-    })
 }
 
 /*
+we are counting the number of patients per month, thus
 increment our count each time an entry in our db matches the key
 */
+
 const createDataByMonthObject = (obj, month, key) => {
   // set our nested month obj if it doesnt exist yet
   if (!obj[month]) {
@@ -112,6 +123,45 @@ const createDataByMonthObject = (obj, month, key) => {
   if (!obj[month].Total) obj[month].Total = 1
   else obj[month].Total++
   return obj
+}
+
+/*
+convert each month into percentages
+// TODO refactor me! :)
+*/
+
+const convertMonthlyDataIntoPercentage = months => {
+  const monthlyPercentage = {}
+  // iterate over the months
+  for (const month in months) {
+    monthlyPercentage[month] = { month }
+    // we need to conver each month's data into a percentage
+    for (const key in months[month]) {
+      // dont attempt to calc non-data values
+      const shouldCalculatePercent = key !== 'month' && key !== 'Total'
+      if (shouldCalculatePercent) {
+        monthlyPercentage[month][key] = Math.floor(
+          parseFloat(months[month][key] / months[month].Total * 100)
+        )
+      }
+    }
+  }
+  return monthlyPercentage
+}
+
+/*
+map each monthly-count object into an array,
+then sort array
+*/
+
+const getDataByMonthSortedArray = dataByMonth => {
+  return Object.keys(dataByMonth)
+    .map(month => dataByMonth[month]) // convert ea month into an array element
+    .sort((a, b) => {
+      // sort so chart data is ascending by date
+      if (a.month < b.month) return -1
+      else return 1
+    })
 }
 
 module.exports = {

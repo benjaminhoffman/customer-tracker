@@ -1,0 +1,10 @@
+@media (max-width: 636px) {
+  .main {
+    /*margin-top: 250px;*/
+  }
+}
+
+.main {
+  background-color: #83a2b9;
+  border-radius: 24px;
+}

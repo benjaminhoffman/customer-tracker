@@ -3,14 +3,14 @@ A simple web app to help service professionals (i.e. lawyers, physicians) track 
 
 # Development
 
-### client
+## client
 - react 15
 - webpack 3
 - es6 via babel 6
 - css modules
 - eslint/standard & prettier for linting & code quality
 
-### server
+## server
 - node 8.1.6
 - express 4
 - firebase for db
@@ -23,7 +23,8 @@ A simple web app to help service professionals (i.e. lawyers, physicians) track 
 ```bash
 $ yarn install
 $ yarn client
-http://localhost:8080
+-> http://localhost:8080
+$ yarn server
 ```
 
 # Principles
@@ -34,13 +35,24 @@ http://localhost:8080
 5. dont block the event loop!
 
 # To do
+- [x] redux
+- [ ] use `static`
+- [ ] add `.env` for env vars
 - [x] react router
+- [x] add `historyApiFallback` for HMR refreshes
 - [ ] authentication
 - [x] conditional logic to form fields
-- [ ] make fields required*
-- [ ] proptypes, defaultProps, displayName
+- [x] proptypes, defaultProps, displayName
 - [ ] deploy to heroku
-- [ ] moar graphs!
-- [ ] redux
+- [x] moar graphs!
 - [ ] loading spinner
--
+- [ ] fix package.json proxy setting
+- CSS/HTML
+ - [ ] make fields required*
+ - [x] semantic markup
+ - [ ] CSS preprocessor
+   - [ ] add `<fieldset>` to forms
+   - [x] add `<nav>` `<main>` `<header>` `<section>` `<footer>`
+ - [ ] add reset/normalize
+ - [x] do not nest within `<span>`
+ - [ ] convert to `border-box`
