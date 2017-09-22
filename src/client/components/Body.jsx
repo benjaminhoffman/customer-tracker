@@ -15,7 +15,7 @@ const Body = ({
 }) => {
   return (
     <main className={styles.main} role="main">
-      <Route exact path="/" component={Login} />
+      <Route exact path="/" render={() => <Login onLogin={onLogin} />} />
       <Route exact path="/login" render={() => <Login onLogin={onLogin} />} />
       <Route
         path="/entry"

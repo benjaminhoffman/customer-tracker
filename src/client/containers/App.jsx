@@ -7,6 +7,7 @@ import axios from 'axios'
 import updateNewEntryField from '../actions/NewEntryForm'
 import store from '../store'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 class AppContainer extends Component {
   constructor(props) {
@@ -88,4 +89,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppContainer)
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(AppContainer)
+)
